@@ -2,7 +2,8 @@
 
 @layer demo {
   fieldset {
-    grid-template-columns: 
+    grid-template-columns:
+    /* can add new images here */ 
       var(--col-1, 1fr) 
       var(--col-2, 1fr) 
       var(--col-3, 1fr) 
@@ -16,6 +17,7 @@
       transition: grid-template-columns 2s var(--ease-spring-5);
     }
     
+    /* detects which image is selected and adjusts the column sizes accordingly */
     &:has(label:nth-child(1) > input:checked) {
       --col-1: 5fr;
       --col-2: 3fr;
@@ -87,7 +89,7 @@
       
       /* border around picture when clicked */
       &:focus-within {
-        outline: 1px solid rgb(67, 152, 250);
+        outline: 1.5px solid rgb(126, 126, 126);
         /* how far the border is outside of picture */
         outline-offset: 5px;
       }
