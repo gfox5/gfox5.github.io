@@ -19,8 +19,9 @@
     border-top: 1mm solid red;
     border-bottom: 1mm solid red;
     background-color: white;
-    background: linear-gradient(to bottom, rgba(0,0,0,0.4),rgba(0,0,0,0) 20%, rgba(0,0,0,0) 80%, rgba(0,0,0,0.4)) url(ica5-top-image.png) no-repeat left top,
+    background: linear-gradient(to bottom, rgba(0,0,0,0.2),rgba(0,0,0,0) 20%, rgba(0,0,0,0) 80%, rgba(0,0,0,0.2)), url(ica5-top-image.png) no-repeat left top,
     url(ica5-bottom-image.png) no-repeat left bottom;
+    
   }
   
   address {
@@ -41,6 +42,7 @@
     padding: 44px 0;
     color: white;
     text-shadow: 1px 1px 1px black;
+    background: url(ica5-logo.png) no-repeat;
+    filter: drop-shadow(2px 2px 2px black);
   }
   
-  /* Your CSS below here */
