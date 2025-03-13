@@ -35,7 +35,8 @@
                       rgba(67, 95, 220, .5) 70%, 
                     rgba(67, 95, 220,0) 100%);
         width: 100%;
-        padding: 20px ; /* Added padding for better appearance */
+        padding-bottom: 25px ; /* Added padding for better appearance */
+        padding-top:25px;
     }
     
     h1 {
