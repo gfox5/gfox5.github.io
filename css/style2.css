@@ -1,0 +1,188 @@
+*{
+    font-family: 'Space Grotesk', sans-serif;
+    background-color: black;
+}
+
+header{
+    position: fixed;
+    top: 0;
+    margin: 0;
+    height: 15vh;
+    width: 100vw;
+    background: linear-gradient(to bottom, rgba(0, 0, 0, 1), rgba(0, 0, 0, 0));
+    left: 0;
+    padding: 0;
+}
+
+footer{
+    position: fixed;
+    bottom: 0;
+    margin: 0;
+    height: 15vh;
+    width: 100vw;
+    background: linear-gradient(to top, rgba(0, 0, 0, 1), rgba(0, 0, 0, 0));
+    left: 0;
+    padding: 0;
+}
+
+body {
+    color: #F3F1ED;
+}
+
+a, a:hover, a:active, a:visited{
+    color:#F3F1ED;
+    text-decoration: none;
+}
+
+h1{
+    position: sticky;
+    top: 0;
+    text-align: right;
+    margin: 0;
+    font-size: 4vmax;
+    background-color: transparent;
+    text-shadow: #73cbf2 20px 10px 10px;
+}
+
+h2{
+    font-size: 2.5vmax;
+    text-align: right;
+}
+
+h3{
+    /* text-decoration: double underline #FF6100; */
+    /* text-underline-offset: 0.7em; */
+    /* font-size: 1.7vmax; */
+    font-size: 1.2em;
+    margin-top: 0.5em;
+    margin-bottom: 0.2em;
+}
+
+
+hr{
+    height: 3px;
+    background: linear-gradient(to right, #ff620000, #FF6100, #ff620000);
+    border: none;
+}
+
+.concertContainer{
+    margin: 0.7em;
+    margin-bottom: 2em;
+    padding: 1em;
+    border: 5px dashed #FF6100;
+}
+
+.infoBlock{
+    display: flex;
+    flex-direction: column;
+    /* font-size: 1vmax; */
+    font-size: 0.75em;
+    width: 100%;
+    height: fit-content;
+    /* padding-top: 0.3em; */
+    padding-bottom: 0.5em;
+    /* padding-right: -1em; */
+    box-shadow: #73ccf285 5px 5px 7px 0.5px; 
+}
+
+.concertContainer:nth-child(even) .infoBlock{
+    box-shadow: #73ccf285 -5px 5px 7px 0.5px; 
+}
+
+.glowText{
+    text-shadow: #73cbf2 0px 0px 10px;
+}
+
+.infoText{
+    text-shadow: #73cbf2 4px 4px 5px;
+}
+
+.time{
+    margin: 0.5em;
+}
+
+.conductor{
+    margin: 0.5em;
+}
+
+.repertoire{
+    margin: 0.5em;
+}
+
+.location{
+    padding: 0;
+    margin: 0;
+    margin-bottom: 1em;
+    display: block;
+    font-weight: bold;
+}
+
+.description{
+    /* width: 80%; */
+    padding: 0.5em;
+    /* font-size: 1vmax; */
+    font-size: 0.85em;
+}
+
+@keyframes shrink{
+    0%{
+        font-size: 4vw;
+    }
+
+    3%{
+        font-size: 2.5vw;
+    }
+
+    100%{
+        font-size: 2.5vw;
+    }
+}
+
+@media screen and (max-width: 600px){
+    .concertContainer{
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+    }
+}
+    
+@media screen and (min-width: 601px){
+    body{
+        padding-left: 5em;
+        padding-right: 5em;
+    }
+
+    h1{
+        height: 8vh;
+        animation: shrink forwards linear;
+        animation-timeline: scroll();
+    }
+
+    .concertContainer{
+        width: 75vw;
+    }
+
+    .concertBlock{
+        display: flex;
+        flex-direction: column;
+    }
+
+    .concertContainer:nth-child(odd){
+        margin-left: auto;
+        box-shadow: 0px;
+        transition: box-shadow 1s;
+    }
+
+    .concertContainer:nth-child(even){
+        box-shadow: 0px;
+        transition: box-shadow 1s;
+    }
+
+    .concertContainer:hover:nth-child(odd){
+        box-shadow: #FF6100 -10px 5px 30px 5px;
+    }
+
+    .concertContainer:hover:nth-child(even){
+        box-shadow: #7c40d6 10px 5px 30px 5px;
+    }
+}
