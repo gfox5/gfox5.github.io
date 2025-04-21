@@ -16,15 +16,10 @@ const cSize = 500;
 c.width = cSize;
 c.height = cSize;
 
-// Update color preview
-function updateColorPreview() {
-  const preview = document.getElementById('colorPreview');
-  preview.style.backgroundColor = `rgb(${redValue}, ${greenValue}, ${blueValue})`;
-}
 
 function render() {
   
-	ctx.fillStyle = "rgba(0,0,0,0.05)";
+	ctx.fillStyle = "rgba(0,0,0,0.007)";
 	ctx.fillRect(0, 0, cSize, cSize);
 
   const t = performance.now() * 0.0005
