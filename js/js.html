@@ -1,0 +1,459 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Phone Number Picker</title>
+    <style>
+        body {
+            font-family: 'Comic Sans MS', cursive, sans-serif;
+            background: color("white");
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+            overflow: hidden;
+        }
+        
+        .container {
+            background-color: rgba(255, 255, 255, 0.8);
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 0 20px rgba(0, 0, 0, 0.3);
+            width: 90%;
+            max-width: 500px;
+            text-align: center;
+            position: relative;
+        }
+        
+        h1 {
+            color: #2f00ff;
+            text-shadow: 2px 2px 4px #81adff;
+            
+        }
+        
+        #phone-display {
+            font-size: 24px;
+            font-weight: bold;
+            margin: 20px 0;
+            padding: 10px;
+            border: 2px dashed #ff6600;
+            border-radius: 5px;
+            background-color: #f8f8f8;
+        }
+        
+        .button-container {
+            display: flex;
+            justify-content: space-around;
+            margin-top: 20px;
+        }
+        
+        .button {
+            padding: 10px 20px;
+            font-size: 18px;
+            cursor: pointer;
+            border: none;
+            border-radius: 5px;
+            transition: transform 0.2s, background-color 0.3s;
+        }
+        
+        #yes-btn {
+            background-color: #4CAF50;
+            color: white;
+        }
+        
+        #no-btn {
+            background-color: #f44336;
+            color: white;
+        }
+        
+        .button:hover {
+            transform: scale(1.05);
+        }
+        
+        #edit-container {
+            display: none;
+            margin-top: 20px;
+        }
+        
+        #digit-selector {
+            padding: 10px;
+            margin-right: 10px;
+            font-size: 16px;
+        }
+        
+        #new-digit {
+            padding: 10px;
+            margin-right: 10px;
+            font-size: 16px;
+            width: 50px;
+            text-align: center;
+        }
+        
+        #apply-btn {
+            padding: 10px 15px;
+            font-size: 16px;
+            background-color: #ff9800;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+        
+        #counts {
+            margin-top: 10px;
+            font-style: italic;
+            color: #666;
+        }
+        
+        #modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0,0,0,0.7);
+            z-index: 100;
+            justify-content: center;
+            align-items: center;
+        }
+        
+        .modal-content {
+            background-color: white;
+            padding: 30px;
+            border-radius: 10px;
+            max-width: 80%;
+            text-align: center;
+        }
+        
+        .close-modal {
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            font-size: 16px;
+            border-radius: 5px;
+            cursor: pointer;
+            margin-top: 20px;
+        }
+        
+        #timer-container {
+            display: none;
+            margin-top: 20px;
+        }
+        
+        #timer-bar {
+            width: 100%;
+            height: 20px;
+            background-color: #ddd;
+            border-radius: 10px;
+            margin-top: 10px;
+            overflow: hidden;
+        }
+        
+        #timer-progress {
+            height: 100%;
+            width: 0%;
+            background-color: #4CAF50;
+            transition: width 0.1s linear;
+        }
+        
+        .error-message {
+            color: #ff0000;
+            margin-top: 10px;
+            font-weight: bold;
+            min-height: 20px;
+        }
+        
+        #extra-attempts-info {
+            color: #0066cc;
+            font-style: italic;
+            margin-top: 10px;
+            font-size: 14px;
+            min-height: 20px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Is this your phone number?</h1>
+        <div id="phone-display">0000000000</div>
+        
+        <div class="button-container">
+            <button id="yes-btn" class="button">Yes</button>
+            <button id="no-btn" class="button">No</button>
+        </div>
+        
+        <div id="edit-container">
+            <p>Edit a digit:</p>
+            <select id="digit-selector">
+                <option value="">Select a digit to change...</option>
+            </select>
+            <input type="text" id="new-digit" maxlength="1" pattern="[0-9]" placeholder="0-9">
+            <button id="apply-btn">Apply</button>
+        </div>
+        
+        <div id="timer-container">
+            <p>Wait <span id="seconds-left">10</span> seconds for an extra attempt...</p>
+            <div id="timer-bar">
+                <div id="timer-progress"></div>
+            </div>
+        </div>
+        
+        <div class="error-message" id="error-message"></div>
+        <div id="extra-attempts-info"></div>
+        
+        <div id="counts">
+            <div>No responses: <span id="no-count">0</span> / 5</div>
+            <div>Edit attempts: <span id="edit-count">0</span> / 5</div>
+        </div>
+    </div>
+    
+    <div id="modal">
+        <div class="modal-content">
+            <h2>Thank you!</h2>
+            <p>Your phone number has been successfully submitted.</p>
+            <button class="close-modal">Ok</button>
+        </div>
+    </div>
+
+    <script>
+        // Variables
+        let phoneNumber = "";
+        let noCount = 0;
+        let editCount = 0;
+        const maxEditCount = 5;
+        const noThreshold = 5;  // How many "No" clicks before allowing edits
+        let extraAttemptsUsed = 0;
+        const maxExtraAttempts = 3;
+        let timerActive = false;
+        
+        // DOM Elements
+        const phoneDisplay = document.getElementById("phone-display");
+        const yesBtn = document.getElementById("yes-btn");
+        const noBtn = document.getElementById("no-btn");
+        const editContainer = document.getElementById("edit-container");
+        const digitSelector = document.getElementById("digit-selector");
+        const newDigit = document.getElementById("new-digit");
+        const applyBtn = document.getElementById("apply-btn");
+        const noCountDisplay = document.getElementById("no-count");
+        const editCountDisplay = document.getElementById("edit-count");
+        const errorMessage = document.getElementById("error-message");
+        const extraAttemptsInfo = document.getElementById("extra-attempts-info");
+        const modal = document.getElementById("modal");
+        const closeModal = document.querySelector(".close-modal");
+        const timerContainer = document.getElementById("timer-container");
+        const secondsLeft = document.getElementById("seconds-left");
+        const timerProgress = document.getElementById("timer-progress");
+        
+        // Initialize
+        function initialize() {
+            generateRandomNumber();
+            populateDigitSelector();
+            setupEventListeners();
+            updateDisplay();
+        }
+        
+        // Generate random 10-digit number
+        function generateRandomNumber() {
+            phoneNumber = "";
+            for (let i = 0; i < 10; i++) {
+                phoneNumber += Math.floor(Math.random() * 10).toString();
+            }
+        }
+        
+        // Format phone number for display
+        function formatPhoneNumber(number) {
+            return number.replace(/(\d{3})(\d{3})(\d{4})/, "($1) $2-$3");
+        }
+        
+        // Populate digit selector dropdown
+        function populateDigitSelector() {
+            digitSelector.innerHTML = '<option value="">Select which digit to change...</option>';
+            for (let i = 0; i < 10; i++) {
+                const option = document.createElement("option");
+                option.value = i;
+                option.textContent = `Digit ${i+1}: ${phoneNumber[i]}`;
+                digitSelector.appendChild(option);
+            }
+        }
+        
+        // Update display elements
+        function updateDisplay() {
+            phoneDisplay.textContent = formatPhoneNumber(phoneNumber);
+            noCountDisplay.textContent = noCount;
+            editCountDisplay.textContent = editCount;
+            
+            // Show extra attempts info if we have used any
+            if (extraAttemptsUsed > 0) {
+                extraAttemptsInfo.textContent = `Extra attempts used: ${extraAttemptsUsed} / ${maxExtraAttempts}`;
+            } else {
+                extraAttemptsInfo.textContent = "";
+            }
+        }
+        
+        // Show error message
+        function showError(message) {
+            errorMessage.textContent = message;
+            
+            // Clear error after 3 seconds
+            setTimeout(() => {
+                errorMessage.textContent = "";
+            }, 3000);
+        }
+        
+        // Start timer for extra attempt
+        function startTimer(seconds) {
+            if (timerActive) return; // Prevent multiple timers
+            
+            timerActive = true;
+            timerContainer.style.display = "block";
+            secondsLeft.textContent = seconds;
+            timerProgress.style.width = "0%";
+            
+            let timeLeft = seconds;
+            const interval = 100; // Update every 100ms for smoother animation
+            const steps = seconds * (1000 / interval);
+            let currentStep = 0;
+            
+            const timer = setInterval(() => {
+                currentStep++;
+                const progress = (currentStep / steps) * 100;
+                timerProgress.style.width = progress + "%";
+                
+                if (currentStep % (1000 / interval) === 0) {
+                    timeLeft--;
+                    secondsLeft.textContent = timeLeft;
+                }
+                
+                if (currentStep >= steps) {
+                    clearInterval(timer);
+                    timerContainer.style.display = "none";
+                    timerActive = false;
+                    
+                    // Grant an extra edit attempt
+                    if (extraAttemptsUsed < maxExtraAttempts) {
+                        extraAttemptsUsed++;
+                        editCount--; // Decrease edit count to give an extra attempt
+                        updateDisplay();
+                        showError("You got an extra attempt!");
+                        
+                        // Re-enable edit container if it was hidden
+                        if (editCount === maxEditCount) {
+                            editContainer.style.display = "block";
+                        }
+                    }
+                }
+            }, interval);
+        }
+        
+        // Reset everything
+        function resetPhoneNumber() {
+            noCount = 0;
+            editCount = 0;
+            extraAttemptsUsed = 0;
+            generateRandomNumber();
+            populateDigitSelector();
+            updateDisplay();
+            editContainer.style.display = "none";
+        }
+        
+        // Setup event listeners
+        function setupEventListeners() {
+            // Yes button
+            yesBtn.addEventListener("click", function() {
+                // Show success message and end the app
+                modal.style.display = "flex";
+            });
+            
+            // No button
+            noBtn.addEventListener("click", function() {
+                noCount++;
+                updateDisplay();
+                
+                if (noCount % noThreshold === 0) {
+                    // Every 5 "No" clicks, show edit container
+                    editContainer.style.display = "block";
+                    showError("You can now edit a digit.");
+                } else {
+                    // Generate a new random number
+                    generateRandomNumber();
+                    populateDigitSelector();
+                    updateDisplay();
+                }
+            });
+            
+            // Apply button for editing a digit
+            applyBtn.addEventListener("click", function() {
+                const selectedIndex = digitSelector.value;
+                const newValue = newDigit.value;
+                
+                if (selectedIndex === "" || !/^[0-9]$/.test(newValue)) {
+                    showError("Please select a digit position and enter a valid number (0-9).");
+                    return;
+                }
+                
+                // Update the phone number
+                let updatedNumber = phoneNumber.split('');
+                updatedNumber[selectedIndex] = newValue;
+                phoneNumber = updatedNumber.join('');
+                
+                // Update UI
+                updateDisplay();
+                populateDigitSelector();
+                
+                // Increment edit count
+                editCount++;
+                updateDisplay();
+                
+                // Clear inputs
+                digitSelector.selectedIndex = 0;
+                newDigit.value = "";
+                
+                // Check if the max edit count is reached
+                if (editCount >= maxEditCount) {
+                    // Check if we can offer an extra attempt
+                    if (extraAttemptsUsed <= maxExtraAttempts) {
+                        // Offer a waiting period for an extra attempt
+                        showError("You've used all your attempts. Wait for an extra one!");
+                        startTimer(10); // 10 second wait
+
+                        updateDisplay();
+                        populateDigitSelector();
+
+                        
+                        // Hide edit container until extra attempt is granted
+                        //editContainer.style.display = "none";
+                    } else {
+                        // No more extra attempts available, reset everything
+                        editContainer.style.display = "none";
+                        showError("You've used all your edit attempts including extras. Starting over with a new number.");
+                        
+                        // After a short delay, reset everything
+                        setTimeout(() => {
+                            resetPhoneNumber();
+                        }, 2000);
+                    }
+                }
+            });
+            
+            // Close modal
+            closeModal.addEventListener("click", function() {
+                modal.style.display = "none";
+                // Reset the application
+                resetPhoneNumber();
+            });
+            
+            // New digit input validation
+            newDigit.addEventListener("input", function() {
+                this.value = this.value.replace(/[^0-9]/g, '');
+            });
+        }
+        
+        // Initialize on page load
+        window.onload = initialize;
+    </script>
+</body>
+</html>
