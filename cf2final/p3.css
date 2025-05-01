@@ -1,0 +1,160 @@
+:root{
+    --background-color: #850043;
+}
+body {
+    font-family: Futura, sans-serif;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    background: linear-gradient(#ffcfe8,#f32886);/*linear-gradient(#e4a1c1,#e4c3a1,#e4e1a1,#a1e4a8,#a1d6e4,#a1b2e4,#c4a1e4); /*var(--background-color) */
+    min-height: 100vh;
+    margin: 0;
+    padding: 20px;
+    box-sizing: border-box;
+    transition: background-color 0.5s ease;
+}
+h1 {
+    color: #2c3e50;
+}
+#game-container {
+    margin: 20px;
+}
+#game-grid {
+    /* display: grid;
+    grid-template-columns: repeat(5, 80px);
+    grid-template-rows: repeat(5, 80px);
+    gap: 5px;
+    margin-bottom: 20px;
+    background: linear-gradient(#ecf0f1,#ed6ca8); */
+    display: grid;
+    grid-template-columns: repeat(5, 80px);
+    grid-template-rows: repeat(5, 80px);
+    border-color: #ecf0f1;
+    border-radius: 5px; 
+    gap: 7px;
+    margin-bottom: 20px;
+    background: transparent;
+    padding: 3px;
+
+}
+.grid-cell {
+    /* width: 80px;
+    height: 80px;
+    background: #ecf0f100;
+    border-radius: 5px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+    cursor: pointer; */
+    width: 80px;
+    height: 80px;
+    background-color: rgba(236, 240, 241, 0.3);  /* Slightly transparent background */  
+    border-radius: 10px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+    cursor: pointer;
+    backdrop-filter: blur(1px);  /*  adds a slight blur effect */
+    border: 0 solid rgba(255, 255, 255, 0.2);  /* adds a subtle border */
+}
+.ball {
+    width: 60px;
+    height: 60px;
+    border-radius: 50%;
+    background-color: #95a5a6;
+    position: absolute;
+    transition: transform 0.5s ease-in-out;
+}
+.active {
+    background-color: #424242;
+}
+.controls {
+    display: flex;
+    gap: 10px;
+    margin-bottom: 20px;
+}
+button {
+    padding: 10px 15px;
+    background-color: #95a5a6;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 16px;
+}
+button:hover {
+    background-color: #424242;
+}
+
+/* Tooltip for start button */
+#start-btn {
+    position: relative;
+}
+
+#reset-btn {
+    position: relative;
+}
+
+#start-btn:hover::after {
+    content: "Press to begin the game";
+    position: absolute;
+    background-color: #34495e;
+    color: white;
+    padding: 5px 10px;
+    border-radius: 5px;
+    top: -40px;
+    left: 50%;
+    transform: translateX(-50%);
+    white-space: nowrap;
+    z-index: 10;
+}
+
+#reset-btn:hover::after {
+    content: "Press to reset your score";
+    position: absolute;
+    background-color: #34495e;
+    color: white;
+    padding: 5px 10px;
+    border-radius: 5px;
+    top: -40px;
+    left: 50%;
+    transform: translateX(-50%);
+    white-space: nowrap;
+    z-index: 10;
+}
+
+button:disabled {
+    background-color: #95a5a6;
+    cursor: not-allowed;
+}
+#status {
+    margin: 20px 0;
+    font-size: 18px;
+    color: #2c3e50;
+}
+#score {
+    font-size: 20px;
+    font-weight: bold;
+    color: #2c3e50;
+}
+.difficulty {
+    margin: 10px 0;
+}
+
+/* Rainbow animation class */
+@keyframes rainbowBackground {
+    0% { background: #f95c64; } 
+    14% { background: #ff6d59; } 
+    28% { background:  #ff9041;} 
+    42% { background:  #fa5d87;} 
+    57% { background:  #ff91c6} 
+    71% { background:  #ffbae5} 
+    85% { background: #ff68af; } 
+    100% { background: #f32886; } 
+}
+
+.rainbow-flash {
+    animation: rainbowBackground 3s ease-in-out 3;
+}
