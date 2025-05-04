@@ -6,8 +6,8 @@
     <title>Phone Number Picker</title>
     <style>
         body {
-            font-family: 'Comic Sans MS', sans-serif;
-            background: color("white");
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
             display: flex;
             justify-content: center;
             align-items: center;
@@ -17,45 +17,65 @@
         }
         
         .container {
-            background-color: rgba(255, 255, 255, 0.8);
-            padding: 20px;
-            border-radius: 10px;
-            box-shadow: 0 0 20px rgba(0, 0, 0, 0.3);
+            background-color: #ffffff;
+            padding: 30px;
+            border-radius: 15px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
             width: 90%;
             max-width: 500px;
             text-align: center;
             position: relative;
+            transition: all 0.3s ease;
         }
         
         h1 {
-            color: #2f00ff;
-            text-shadow: 2px 2px 4px #81adff;
-            
+            color: #3a36e0;
+            margin-bottom: 20px;
+            font-weight: 600;
+            position: relative;
+            display: inline-block;
+        }
+        
+        h1::after {
+            content: '';
+            position: absolute;
+            bottom: -8px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 60%;
+            height: 3px;
+            background: linear-gradient(90deg, #3a36e0, #7b4397);
+            border-radius: 3px;
         }
         
         #phone-display {
-            font-size: 24px;
+            font-size: 28px;
             font-weight: bold;
-            margin: 20px 0;
-            padding: 10px;
-            border: 2px dashed #ff6600;
-            border-radius: 5px;
+            margin: 25px 0;
+            padding: 15px;
+            border: 2px solid #3a36e0;
+            border-radius: 10px;
             background-color: #f8f8f8;
+            box-shadow: inset 0 1px 3px rgba(0,0,0,0.1);
+            color: #333;
+            transition: all 0.3s ease;
         }
         
         .button-container {
             display: flex;
             justify-content: space-around;
-            margin-top: 20px;
+            margin-top: 25px;
         }
         
         .button {
-            padding: 10px 20px;
+            padding: 12px 25px;
             font-size: 18px;
             cursor: pointer;
             border: none;
-            border-radius: 5px;
-            transition: transform 0.2s, background-color 0.3s;
+            border-radius: 8px;
+            transition: all 0.3s ease;
+            font-weight: 500;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
         }
         
         #yes-btn {
@@ -63,24 +83,52 @@
             color: white;
         }
         
+        #yes-btn:hover {
+            background-color: #3e8e41;
+            transform: translateY(-2px);
+            box-shadow: 0 6px 8px rgba(0,0,0,0.1);
+        }
+        
         #no-btn {
             background-color: #f44336;
             color: white;
         }
         
-        .button:hover {
-            transform: scale(1.05);
+        #no-btn:hover {
+            background-color: #d32f2f;
+            transform: translateY(-2px);
+            box-shadow: 0 6px 8px rgba(0,0,0,0.1);
         }
         
         #edit-container {
             display: none;
-            margin-top: 20px;
+            margin-top: 25px;
+            background-color: #f5f7fa;
+            padding: 15px;
+            border-radius: 10px;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.05);
+            animation: fadeIn 0.5s ease;
+        }
+        
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        
+        #edit-container p {
+            margin-bottom: 12px;
+            color: #555;
+            font-weight: 500;
         }
         
         #digit-selector {
             padding: 10px;
             margin-right: 10px;
             font-size: 16px;
+            border-radius: 6px;
+            border: 1px solid #ddd;
+            box-shadow: inset 0 1px 3px rgba(0,0,0,0.1);
+            background-color: white;
         }
         
         #new-digit {
@@ -89,22 +137,53 @@
             font-size: 16px;
             width: 50px;
             text-align: center;
+            border-radius: 6px;
+            border: 1px solid #ddd;
+            box-shadow: inset 0 1px 3px rgba(0,0,0,0.1);
         }
         
         #apply-btn {
             padding: 10px 15px;
             font-size: 16px;
-            background-color: #ff9800;
+            background-color: #3a36e0;
             color: white;
             border: none;
-            border-radius: 5px;
+            border-radius: 6px;
             cursor: pointer;
+            transition: all 0.3s ease;
+        }
+        
+        #apply-btn:hover {
+            background-color: #2e2cb8;
+            transform: translateY(-2px);
         }
         
         #counts {
-            margin-top: 10px;
-            font-style: italic;
+            margin-top: 20px;
+            background-color: #f5f7fa;
+            padding: 10px;
+            border-radius: 8px;
+            display: flex;
+            justify-content: space-around;
+            font-size: 14px;
             color: #666;
+        }
+        
+        .count-box {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+        
+        .count-label {
+            font-weight: 500;
+            margin-bottom: 5px;
+            color: #555;
+        }
+        
+        .count-value {
+            font-weight: bold;
+            color: #3a36e0;
         }
         
         #modal {
@@ -118,61 +197,133 @@
             z-index: 100;
             justify-content: center;
             align-items: center;
+            animation: fadeIn 0.3s ease;
         }
         
         .modal-content {
             background-color: white;
-            padding: 30px;
-            border-radius: 10px;
+            padding: 40px;
+            border-radius: 15px;
             max-width: 80%;
             text-align: center;
+            box-shadow: 0 15px 30px rgba(0,0,0,0.2);
+            animation: scaleIn 0.3s ease;
+        }
+        
+        @keyframes scaleIn {
+            from { transform: scale(0.9); opacity: 0; }
+            to { transform: scale(1); opacity: 1; }
+        }
+        
+        .modal-content h2 {
+            color: #3a36e0;
+            margin-bottom: 15px;
         }
         
         .close-modal {
             background-color: #4CAF50;
             color: white;
             border: none;
-            padding: 10px 20px;
+            padding: 12px 25px;
             font-size: 16px;
-            border-radius: 5px;
+            border-radius: 8px;
             cursor: pointer;
             margin-top: 20px;
+            transition: all 0.3s ease;
+            font-weight: 500;
+        }
+        
+        .close-modal:hover {
+            background-color: #3e8e41;
+            transform: translateY(-2px);
         }
         
         #timer-container {
             display: none;
             margin-top: 20px;
+            padding: 15px;
+            background-color: #f5f7fa;
+            border-radius: 10px;
+            animation: fadeIn 0.5s ease;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.05);
+        }
+        
+        #timer-container p {
+            margin-bottom: 10px;
+            color: #555;
+            font-weight: 500;
+        }
+        
+        #seconds-left {
+            font-weight: bold;
+            color: #3a36e0;
         }
         
         #timer-bar {
             width: 100%;
-            height: 20px;
-            background-color: #ddd;
+            height: 10px;
+            background-color: #e0e0e0;
             border-radius: 10px;
             margin-top: 10px;
             overflow: hidden;
+            box-shadow: inset 0 1px 3px rgba(0,0,0,0.1);
         }
         
         #timer-progress {
             height: 100%;
             width: 0%;
-            background-color: #4CAF50;
+            background: linear-gradient(90deg, #3a36e0, #7b4397);
+            border-radius: 10px;
             transition: width 0.1s linear;
         }
         
-        .error-message {
-            color: #ff0000;
-            margin-top: 10px;
-            font-weight: bold;
+        .message {
+            margin-top: 15px;
+            padding: 10px;
+            border-radius: 8px;
+            font-weight: 500;
             min-height: 20px;
+            transition: all 0.3s ease;
+            animation: fadeIn 0.5s ease;
+        }
+        
+        .error-message {
+            color: #d32f2f;
+            background-color: #ffebee;
+            border-left: 4px solid #d32f2f;
         }
         
         #extra-attempts-info {
-            color: #0066cc;
-            font-style: italic;
+            color: #3a36e0;
             margin-top: 10px;
-            font-size: 14px;
+            font-weight: 500;
             min-height: 20px;
+            background-color: #e8eaf6;
+            padding: 8px;
+            border-radius: 6px;
+            border-left: 4px solid #3a36e0;
+            display: none;
+            animation: fadeIn 0.5s ease;
+        }
+        
+        .digit-highlight {
+            animation: pulse 1s infinite;
+        }
+        
+        @keyframes pulse {
+            0% { opacity: 1; }
+            50% { opacity: 0.5; }
+            100% { opacity: 1; }
+        }
+        
+        .shake {
+            animation: shake 0.5s;
+        }
+        
+        @keyframes shake {
+            0%, 100% { transform: translateX(0); }
+            10%, 30%, 50%, 70%, 90% { transform: translateX(-5px); }
+            20%, 40%, 60%, 80% { transform: translateX(5px); }
         }
     </style>
 </head>
@@ -187,9 +338,9 @@
         </div>
         
         <div id="edit-container">
-            <p>Edit a digit:</p>
+            <p>Edit a digit in your phone number:</p>
             <select id="digit-selector">
-                <option value="">Select a digit to change...</option>
+                <option value="">Select which digit to change...</option>
             </select>
             <input type="text" id="new-digit" maxlength="1" pattern="[0-9]" placeholder="0-9">
             <button id="apply-btn">Apply</button>
@@ -202,12 +353,18 @@
             </div>
         </div>
         
-        <div class="error-message" id="error-message"></div>
+        <div class="message error-message" id="error-message" style="display: none;"></div>
         <div id="extra-attempts-info"></div>
         
         <div id="counts">
-            <div>No responses: <span id="no-count">0</span> / 5</div>
-            <div>Edit attempts: <span id="edit-count">0</span> / 5</div>
+            <div class="count-box">
+                <div class="count-label">No responses</div>
+                <div class="count-value"><span id="no-count">0</span> / 5</div>
+            </div>
+            <div class="count-box">
+                <div class="count-label">Edit attempts</div>
+                <div class="count-value"><span id="edit-count">0</span> / 5</div>
+            </div>
         </div>
     </div>
     
@@ -215,7 +372,8 @@
         <div class="modal-content">
             <h2>Thank you!</h2>
             <p>Your phone number has been successfully submitted.</p>
-            <button class="close-modal">Ok</button>
+            <p id="final-number"></p>
+            <button class="close-modal">Close</button>
         </div>
     </div>
 
@@ -229,6 +387,7 @@
         let extraAttemptsUsed = 0;
         const maxExtraAttempts = 3;
         let timerActive = false;
+        let editingEnabled = false;
         
         // DOM Elements
         const phoneDisplay = document.getElementById("phone-display");
@@ -247,6 +406,7 @@
         const timerContainer = document.getElementById("timer-container");
         const secondsLeft = document.getElementById("seconds-left");
         const timerProgress = document.getElementById("timer-progress");
+        const finalNumber = document.getElementById("final-number");
         
         // Initialize
         function initialize() {
@@ -288,20 +448,59 @@
             
             // Show extra attempts info if we have used any
             if (extraAttemptsUsed > 0) {
+                extraAttemptsInfo.style.display = "block";
                 extraAttemptsInfo.textContent = `Extra attempts used: ${extraAttemptsUsed} / ${maxExtraAttempts}`;
             } else {
-                extraAttemptsInfo.textContent = "";
+                extraAttemptsInfo.style.display = "none";
             }
         }
         
         // Show error message
         function showError(message) {
             errorMessage.textContent = message;
+            errorMessage.style.display = "block";
             
             // Clear error after 3 seconds
             setTimeout(() => {
-                errorMessage.textContent = "";
+                errorMessage.style.display = "none";
             }, 3000);
+        }
+        
+        // Highlight a digit in the phone display
+        function highlightDigit(index) {
+            const formattedNumber = formatPhoneNumber(phoneNumber);
+            let displayHTML = "";
+            
+            // Account for formatting characters in the string
+            let actualIndex = index;
+            if (index >= 3) actualIndex += 1; // After first parenthesis
+            if (index >= 6) actualIndex += 1; // After second parenthesis
+            if (index >= 6) actualIndex += 1; // After the space
+            
+            for (let i = 0; i < formattedNumber.length; i++) {
+                if (i === actualIndex) {
+                    displayHTML += `<span class="digit-highlight">${formattedNumber[i]}</span>`;
+                } else {
+                    displayHTML += formattedNumber[i];
+                }
+            }
+            
+            phoneDisplay.innerHTML = displayHTML;
+            
+            // Clear highlight after 2 seconds
+            setTimeout(() => {
+                phoneDisplay.textContent = formattedNumber;
+            }, 2000);
+        }
+        
+        // Apply shake animation to element
+        function shakeElement(element) {
+            element.classList.add("shake");
+            
+            // Remove the class after the animation completes
+            setTimeout(() => {
+                element.classList.remove("shake");
+            }, 500);
         }
         
         // Start timer for extra attempt
@@ -314,7 +513,7 @@
             timerProgress.style.width = "0%";
             
             let timeLeft = seconds;
-            const interval = 100; // Update every 100ms for smoother animation
+            const interval = 100; // Update every 100ms 
             const steps = seconds * (1000 / interval);
             let currentStep = 0;
             
@@ -341,9 +540,7 @@
                         showError("You got an extra attempt!");
                         
                         // Re-enable edit container if it was hidden
-                        if (editCount === maxEditCount) {
-                            editContainer.style.display = "block";
-                        }
+                        editContainer.style.display = "block";
                     }
                 }
             }, interval);
@@ -354,6 +551,7 @@
             noCount = 0;
             editCount = 0;
             extraAttemptsUsed = 0;
+            editingEnabled = false;
             generateRandomNumber();
             populateDigitSelector();
             updateDisplay();
@@ -365,6 +563,7 @@
             // Yes button
             yesBtn.addEventListener("click", function() {
                 // Show success message and end the app
+                finalNumber.textContent = `Phone Number: ${formatPhoneNumber(phoneNumber)}`;
                 modal.style.display = "flex";
             });
             
@@ -374,10 +573,14 @@
                 updateDisplay();
                 
                 if (noCount % noThreshold === 0) {
-                    // Every 5 "No" clicks, show edit container
+                    // Every 5 no clicks, show edit container
+                    editingEnabled = true;
                     editContainer.style.display = "block";
-                    showError("You can now edit a digit.");
+                    showError("You can now edit a digit in the phone number.");
                 } else {
+                    // Shake the display to show rejection
+                    shakeElement(phoneDisplay);
+                    
                     // Generate a new random number
                     generateRandomNumber();
                     populateDigitSelector();
@@ -387,11 +590,16 @@
             
             // Apply button for editing a digit
             applyBtn.addEventListener("click", function() {
+                if (!editingEnabled) {
+                    showError("Editing is not enabled yet. Press 'No' more times.");
+                    return;
+                }
+                
                 const selectedIndex = digitSelector.value;
                 const newValue = newDigit.value;
                 
                 if (selectedIndex === "" || !/^[0-9]$/.test(newValue)) {
-                    showError("Please select a digit position and enter a valid number (0-9).");
+                    showError("Please select a digit position and enter a valid digit (0-9).");
                     return;
                 }
                 
@@ -400,8 +608,10 @@
                 updatedNumber[selectedIndex] = newValue;
                 phoneNumber = updatedNumber.join('');
                 
+                // Highlight the changed digit
+                highlightDigit(parseInt(selectedIndex));
+                
                 // Update UI
-                updateDisplay();
                 populateDigitSelector();
                 
                 // Increment edit count
@@ -412,20 +622,16 @@
                 digitSelector.selectedIndex = 0;
                 newDigit.value = "";
                 
-                // Check if the max edit count is reached
+                // Check if we've reached the max edit count
                 if (editCount >= maxEditCount) {
                     // Check if we can offer an extra attempt
-                    if (extraAttemptsUsed <= maxExtraAttempts) {
+                    if (extraAttemptsUsed < maxExtraAttempts) {
                         // Offer a waiting period for an extra attempt
                         showError("You've used all your attempts. Wait for an extra one!");
                         startTimer(10); // 10 second wait
-
-                        updateDisplay();
-                        populateDigitSelector();
-
                         
                         // Hide edit container until extra attempt is granted
-                        //editContainer.style.display = "none";
+                        editContainer.style.display = "none";
                     } else {
                         // No more extra attempts available, reset everything
                         editContainer.style.display = "none";
@@ -439,6 +645,17 @@
                 }
             });
             
+            // Digit selector change
+            digitSelector.addEventListener("change", function() {
+                if (this.value !== "") {
+                    // Highlight the selected digit
+                    highlightDigit(parseInt(this.value));
+                    
+                    // Focus on the input field
+                    newDigit.focus();
+                }
+            });
+            
             // Close modal
             closeModal.addEventListener("click", function() {
                 modal.style.display = "none";
@@ -446,9 +663,21 @@
                 resetPhoneNumber();
             });
             
-            // New digit input validation
+            // New digit input validation and auto-apply
             newDigit.addEventListener("input", function() {
                 this.value = this.value.replace(/[^0-9]/g, '');
+                
+                // Auto-apply if a digit is entered and a position is selected
+                if (this.value.length === 1 && digitSelector.value !== "") {
+                    applyBtn.click();
+                }
+            });
+            
+            // Allow Enter key to apply changes
+            newDigit.addEventListener("keydown", function(e) {
+                if (e.key === "Enter" && this.value.length === 1 && digitSelector.value !== "") {
+                    applyBtn.click();
+                }
             });
         }
         
