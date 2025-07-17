@@ -8,13 +8,13 @@ body {
  
  .overlay{
      position: absolute;
-     height: 7vw;
-     width: 10vw;
-     background: url(../img/rams-logo.png);
+     height: 30vw;
+     width: 30vw;
+     background: url(overlay.png);
      background-size: contain; 
      background-repeat: no-repeat;
-     top: 44vw;
-     left: 38vw;
+     top: 2vw;
+     left: 65vw;
  }
  
  
@@ -26,5 +26,5 @@ body {
      background-size: contain; 
      background-repeat: no-repeat;
      top: 55vw;
-     left: 10vw;
+     left: 5vw;
  }
