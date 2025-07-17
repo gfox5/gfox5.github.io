@@ -1,0 +1,30 @@
+body {
+    background-image: url(background.jpg);
+    background-repeat: no-repeat;
+    background-size: cover;
+    height: 100%;
+ }
+ 
+ 
+ .rams-logo{
+     position: absolute;
+     height: 7vw;
+     width: 10vw;
+     background: url(../img/rams-logo.png);
+     background-size: contain; 
+     background-repeat: no-repeat;
+     top: 44vw;
+     left: 38vw;
+ }
+ 
+ 
+ .other-logo{
+     position: absolute;
+     height: 12vw;
+     width: 25vw;
+     background: url(qvc.png);
+     background-size: contain; 
+     background-repeat: no-repeat;
+     top: 55vw;
+     lwft: 10vw;
+ }
