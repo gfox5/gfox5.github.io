@@ -7,14 +7,41 @@ body{
     background-color: indianred;
 }
 
+#box1:hover {
+background-color: purple;
+}
 
 #box2{
     width: 25vw;
     height:20vh;
     position: relative;
     background-color: orangered;
+
+    animation: box2move 8s infinite ease-in-out;
+    transition: transform 0.3s ease-in-out
 }
 
-@keyframes box2move{
 
+
+@keyframes box2move{
+    0% { 
+        left: 0vw; 
+        top: 0vw;
+    }
+    25% { 
+        left: 26vw; 
+        top: 0px;
+    }
+    50% { 
+        left: 0px; 
+        top: 20px;
+    }
+    75% { 
+        left: 0vw; 
+        top: 40vw;
+    }
+    100% { 
+        left: 0vw; 
+        top: 0vw;
+    }
 }
