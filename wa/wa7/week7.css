@@ -2,7 +2,7 @@ body{
     display: flex;
     flex-direction: column;
     align-items: center;
-    background-color: blanchedalmond;
+    background-color: rgb(219, 239, 250);
 }
 nav{
     height: 50vh;
@@ -10,27 +10,44 @@ nav{
     flex-direction: row;
     justify-content: space-between;
     height:20px;
-    background-color: blueviolet;
+    background-color: rgba(255, 167, 255, 0.343);
 }
 nav a{
     width:10vw;
     text-align: center;
     text-decoration: none;
-    color:black;
+    color:rgb(103, 118, 214);
+    font-family: helvetica;
+}
+
+h1 {
+    color: rgb(103, 118, 214);
+    font-family: helvetica;
 }
 
 
 img{
+    padding-top: 50px;
     width:30vw;
-    height: 30vh;
 }
 
 #red-ball{
-    background-color: crimson;
-    width: 20px;
-    height:20px;
+    background-color: rgb(255, 167, 255);
+
     border-radius: 50%;
     position: absolute;
-    left:5vw;
     top:0;
+}
+
+
+
+nav:hover #red-ball {
+    animation: bounce 0.5s ease-in-out infinite;
+    width: 20px;
+    height:20px;
+}
+
+@keyframes bounce {
+    0%, 100% { top: 60px; }
+    50% { top: 30px; }
 }
