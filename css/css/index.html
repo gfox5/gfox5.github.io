@@ -12,11 +12,24 @@
       <header>
         <h1>ZΩRBLAXian VOID PULSE COLLECTIVE</h1>
       </header>
+      <!-- Navigation -->
+<div class="nav-bar">
+  <a href="#concert-1">COSMIC SENSORY</a>
+  <a href="#concert-2">QUANTUM RESONANCE</a>
+  <a href="#concert-3">INTERSPECIES</a>
+  <a href="#concert-4">TEMPORAL PARADOX</a>
+  <a href="#concert-5">SUBATOMIC SOUND</a>
+  <a href="#concert-6">PSYCHONAUTIC</a>
+  <a href="#concert-7">MULTISENSORY</a>
+  <a href="#concert-8">GRAVITATIONAL</a>
+  <a href="#concert-9">DIMENSIONAL</a>
+  <a href="#concert-10">ENTROPY REVERSAL</a>
+</div>
       <div class="container">
       <h2>Concert Descriptions</h2>
       <div class="concert-grid">
         <!-- Concert 1 -->
-        <div class="concert-card">
+        <div class="concert-card" id="concert-1">
           <div class="concert-header">
             <h3 class="concert-title">
               COSMIC SENSORY CONVERGENCE: STELLAR VOYAGE
@@ -86,7 +99,7 @@
           </div>
         </div>
         <!-- Concert 2 -->
-        <div class="concert-card">
+        <div class="concert-card" id="concert-2">
           <div class="concert-header">
             <h3 class="concert-title">
               QUANTUM RESONANCE EXPLORATION: VOID ECHOES
@@ -154,7 +167,7 @@
         </div>
 
         <!-- Concert 3 -->
-        <div class="concert-card">
+        <div class="concert-card" id="concert-3">
           <div class="concert-header">
             <h3 class="concert-title">
               INTERSPECIES HARMONIZATION: GALACTIC CHORUS
@@ -222,7 +235,7 @@
         </div>
 
         <!-- Concert 4 -->
-        <div class="concert-card">
+        <div class="concert-card" id="concert-4">
           <div class="concert-header">
             <h3 class="concert-title">
               TEMPORAL PARADOX PERFORMANCE: CHRONOS UNBOUND
@@ -292,7 +305,7 @@
           </div>
         </div>
         <!-- Concert 5 -->
-        <div class="concert-card">
+        <div class="concert-card" id="concert-5">
           <div class="concert-header">
             <h3 class="concert-title">
               SUBATOMIC SOUND EXPLORATION: QUANTUM FREQUENCIES
@@ -362,7 +375,7 @@
         </div>
 
         <!-- Concert 6 -->
-        <div class="concert-card">
+        <div class="concert-card" id="concert-6">
           <div class="concert-header">
             <h3 class="concert-title">
               PSYCHONAUTIC JOURNEY: CONSCIOUSNESS EXPANSION
@@ -431,7 +444,7 @@
         </div>
 
         <!-- Concert 7 -->
-        <div class="concert-card">
+        <div class="concert-card" id="concert-7">
           <div class="concert-header">
             <h3 class="concert-title">
               MULTISENSORY SYNTHESIS: SYNAESTHETIC VOYAGE
@@ -500,7 +513,7 @@
         </div>
 
         <!-- Concert 8 -->
-        <div class="concert-card">
+        <div class="concert-card" id="concert-8">
           <div class="concert-header">
             <h3 class="concert-title">
               GRAVITATIONAL WAVE PERCUSSION: SPACETIME RIPPLES
@@ -568,7 +581,7 @@
         </div>
 
         <!-- Concert 9 -->
-        <div class="concert-card">
+        <div class="concert-card" id="concert-9">
           <div class="concert-header">
             <h3 class="concert-title">
               DIMENSIONAL TRANSMIGRATION: BEYOND THE VEIL
@@ -640,7 +653,7 @@
         </div>
 
         <!-- Concert 10 -->
-        <div class="concert-card">
+        <div class="concert-card" id="concert-10">
           <div class="concert-header">
             <h3 class="concert-title">
               UNIVERSAL ENTROPY REVERSAL: THERMODYNAMIC DEFIANCE
@@ -717,5 +730,22 @@
         </p>
       </footer>
     </div>
+    <a href="#" class="back-to-top" id="backToTop">↑ TOP</a>
+
+<script>
+window.addEventListener('scroll', function() {
+  const backToTop = document.getElementById('backToTop');
+  if (window.scrollY > 100) {
+    backToTop.classList.add('show');
+  } else {
+    backToTop.classList.remove('show');
+  }
+});
+
+document.getElementById('backToTop').addEventListener('click', function(e) {
+  e.preventDefault();
+  window.scrollTo({ top: 0, behavior: 'smooth' });
+});
+</script>
   </body>
 </html>
