@@ -1,16 +1,16 @@
 @import url("https://use.typekit.net/qcn7fwa.css");
 
-/* Base styles */
+/* Base */
 :root {
  --accent-color: #000000; 
  --dark-color: rgb(183, 2, 110); 
- --light-color: #555454; 
+ --light-color: rgba(255, 123, 178, 0.7); 
 }
 
 body {
  font-family: 'Helvetica';
  background-color:rgb(255, 224, 229);
- color: var(--light-color);
+ color: rgb(0, 0, 0);
  margin: 0;
  padding: 0;
 }
@@ -19,7 +19,6 @@ body {
  width: 100%;
  max-width: 1400px;
  margin: 0 auto;
-
 }
 
 header {
@@ -27,7 +26,6 @@ header {
  top: 0; 
  text-align: center;
  margin: 0;
-
  background-image: linear-gradient(to bottom, 
                rgb(183, 2, 110) 0%, 
                rgb(247, 45, 190) 30%,
@@ -58,15 +56,15 @@ h2 {
  font-size: 3rem;
  color: rgba(0, 0, 0, 1);
  text-align: center;
- font-family: "watch-mn", sans-serif;
-font-weight: 400;
-font-style: normal;
+ font-family: "briller", sans-serif;
+ font-weight: 700;
+ font-style: normal;
 }
 
 .concert-grid {
  display: grid;
  column-gap: 20vw;
- row-gap: 10vw;
+ row-gap: 5vw;
 }
 
 .concert-card {
@@ -80,8 +78,6 @@ font-style: normal;
  transition: transform 0.3s ease;
 }
 
-
-
 .concert-header {
  border-bottom: 1px solid var(--accent-color);
  padding-bottom: 10px;
@@ -89,10 +85,10 @@ font-style: normal;
 }
 
 .concert-title {
-font-family: "anatol-mn", sans-serif;
+font-family: "watch-mn", sans-serif;
 font-weight: 400;
 font-style: normal;
- font-size: 2rem;
+ font-size: 2.5rem;
  color: var(--accent-color);
  margin: 0 0 10px 0;
 }
@@ -119,25 +115,23 @@ font-style: normal;
  font-family: "shuttleblock", sans-serif;
  font-weight: 300;
  font-style: italic;
-
 }
 
 .repertoire {
  margin: 15px 0;
- padding: 10px;
- background-color: rgba(0, 0, 0, 0.313);
+ padding: 5px;
+ background-color: var(--light-color);
  border-radius: 30px;
- color: var(--dark-color);;
+ color: rgb(0,0,0);
 }
-
 
 .repertoire-title {
  font-size: 2rem;
  margin-bottom: 5px;
  margin-left: 10px;
  color: var(--accent-color);
- font-family: "watch-mn", sans-serif;
- font-weight: 500;
+ font-family: "anatol-mn", sans-serif;
+ font-weight: 100;
  font-style: normal;
 }
 
@@ -146,7 +140,7 @@ font-style: normal;
 }
 
 .repertoire-item {
- background-color: rgba(247, 45, 190, 0.175);
+ background-color: rgb(255, 224, 229);
  padding: 5px 10px;
  margin: 5px 0;
  display: block;
@@ -170,44 +164,91 @@ footer {
 footer p{
     color: var(--accent-color)
 }
-/* mobile (around 400px) */
+
+
+/* mobile */
 @media (max-width: 600px) {
  .container {
      padding: 10px;
  }
  
  header {
-     padding: 20px;
+     padding: 15px 10px 10px;
  }
  
  h1 {
-     font-size: 1.8rem;
+     font-size: 2.5rem;
+     line-height: 1.1;
+     margin-bottom: 10px;
  }
  
  h2 {
-     font-size: 1.3rem;
+     font-size: 1.8rem;
+     margin: 20px 0;
  }
  
  .concert-grid {
-     grid-template-columns: 3fr;
+     grid-template-columns: 1fr;
+     column-gap: 0;
+     row-gap: 20px;
  }
  
  .concert-card {
-     padding: 15px;
+     padding: 25px;
+     margin: 10px;
+     border-radius: 40px;
+     display: grid;
+     grid-template-columns: 1fr;
+     gap: 15px;
  }
  
  .concert-title {
-     font-size: 1.3rem;
+     font-size: 1.4rem;
+     line-height: 1.2;
+ }
+ 
+ .concert-date {
+     font-size: 0.9rem;
+ }
+ 
+ .concert-conductor,
+ .concert-venue {
+     font-size: 0.9rem;
+ }
+ 
+ .repertoire {
+     padding: 15px;
+     border-radius: 20px;
+     margin: 10px 0;
+ }
+ 
+ .repertoire-title {
+     font-size: 1.4rem;
+     margin-left: 5px;
+ }
+ 
+ .repertoire-list {
+     display: flex;
+     flex-wrap: wrap;
+     gap: 8px;
+     margin: 10px 0;
  }
  
  .repertoire-item {
      font-size: 0.8rem;
+     padding: 6px 10px;
+     border-radius: 15px;
+     flex: 0 1 auto;
  }
-
- .repertoire-list {
-     display: flex;
-     flex-wrap: wrap;
-     gap: 10px;
+ 
+ .concert-description {
+     font-size: 0.9rem;
+     line-height: 1.6;
+ }
+ 
+ footer {
+     padding: 15px 10px;
+     font-size: 0.8rem;
  }
 }
 
@@ -220,7 +261,7 @@ footer p{
  .concert-card {
      display: grid;
      grid-template-columns: 1fr;
-     gap: 15px;
+     gap: 1px;
  }
 
  .repertoire-list {
@@ -228,5 +269,4 @@ footer p{
      flex-wrap: wrap;
      gap: 10px;
  }
-
 }
