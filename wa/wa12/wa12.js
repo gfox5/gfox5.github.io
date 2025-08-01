@@ -30,6 +30,7 @@ async function getQuote() {
 
  function displayQuote(imageUrl) {
     const quoteText = document.querySelector('#js-quote-text');
+    const answerText = document.querySelector('#js-answer-text');
      quoteText.innerHTML = ' ';
 
      //img element
@@ -41,6 +42,16 @@ async function getQuote() {
      img.style.borderRadius = '10px';
     
      quoteText.appendChild(img);
+
+     const urlParts = imageUrl.split('/');
+     const breedPart = urlParts[4];
+     let breedName = breedPart;
+    
+     if (breedName.includes('-')) {
+        breedName = breedName.split('-')[0];
+     }
+    
+    answerText.textContent = breedName;
  }
 
 
@@ -57,6 +68,6 @@ async function getQuote() {
 
 // Add a new variable that holds the API endpoint: 
 // https://trivia.cyberwisp.com/getrandomchristmasquestion
-const endpoint = "https://dog.ceo/api/breeds/image/random"
+const endpoint = "https://dog.ceo/api/breeds/image/random";
 
 getQuote();
