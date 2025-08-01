@@ -16,30 +16,40 @@ async function getQuote() {
         json = await response.json();
         //console.log(json.question);
         //console.log(json.answer);
-        displayQuote(json.question);
+        displayQuote(json.message);
     } catch (err) {
         console.log(err);
         alert('failed to fetch new trivia');
     }
 }
 
-const answerBtn = document.querySelector('#js-tweet');
-answerBtn.addEventListener('click', displayAnswer);
+//  const answerBtn = document.querySelector('#js-tweet');
+//  answerBtn.addEventListener('click', displayAnswer);
 
 
 
-function displayQuote(quote) {
+ function displayQuote(imageUrl) {
     const quoteText = document.querySelector('#js-quote-text');
-    quoteText.textContent = quote;
-}
+     quoteText.innerHTML = ' ';
+
+     //img element
+     const img = document.createElement('img');
+     img.src = imageUrl;
+     img.alt = "Random dog picture";
+     img.style.maxWidth = '100%';
+     img.style.height = 'auto';
+     img.style.borderRadius = '10px';
+    
+     quoteText.appendChild(img);
+ }
 
 
 
-function displayAnswer() {
-    const answerText = json.answer;
-    const answerArea = document.querySelector('#js-tweet');
-    answerArea.textContent = answerText;
-}
+//  function displayAnswer() {
+//     const answerText = json.answer;
+//      const answerArea = document.querySelector('#js-tweet');
+//      answerArea.textContent = answerText;
+//  }
 
 
 
@@ -47,18 +57,6 @@ function displayAnswer() {
 
 // Add a new variable that holds the API endpoint: 
 // https://trivia.cyberwisp.com/getrandomchristmasquestion
-const endpoint = "https://trivia.cyberwisp.com/getrandomchristmasquestion"
-
-// Change the getQuote function to use the fetch method to get a random quote from that endpoint.
-
-// If successful, output the quote to the console
-
-// If it fails, output an error message to the console AND via alert
-
-// Write a second function called "displayQuote" that will display the text of a fetched quote in the HTML element with an id of js-quote-text.
-
-// Adjust getQuote to run displayQuote at the proper place in the code.
-
-// Notice when you refresh that a quote isn't displayed. Fix that.
+const endpoint = "https://dog.ceo/api/breeds/image/random"
 
 getQuote();
