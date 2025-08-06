@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    
+    <script>
+        console.log("Problem 1");
+        console.log("JSON for each employee:");
+
+        const sam = {
+            firstName: "Sam",
+            department: "Tech",
+            designation: "Manager",
+            salary: 40000,
+            raiseEligible: true 
+        };
+
+        const mary = {
+            firstName: "Mary",
+            department: "Finance",
+            designation: "Trainee",
+            salary: 18500,
+            raiseEligible: true
+        };
+
+        const bill = {
+            firstName: "Bill",
+            department: "HR",
+            designation: "Executive",
+            salary: 21200,
+            raiseEligible: false
+        };
+
+        console.log("Sam: ", sam);
+        console.log("Mary: ", mary);
+        console.log("Bill: ", bill);
+
+        console.log("Problem 2");
+        console.log("Company JSON:");
+
+        const company = {
+            companyName: "Tech Stars",
+            website: "www.techstars.site",
+            employees: [sam, mary, bill]
+        };
+
+        console.log("Company:", company);
+
+
+        console.log("Problem 3");
+        console.log("Adding a new employee:");
+
+        const anna = {
+            firstName: "Anna",
+            department: "Tech",
+            designation: "Executive",
+            salary: 25600,
+            raiseEligible: false
+        };
+
+        company.employees.push(anna);
+
+        console.log("Anna:", anna);
+
+        console.log("Problem 4");
+        console.log("total salary for all employees:");
+
+        let totalSalary = 0;
+        for (const employee of company.employees) {
+            totalSalary += employee.salary;
+        }
+
+        console.log("Total salary for all employees:", totalSalary);
+
+        console.log("Problem 5");
+        console.log("10% raise for eligible employees");
+
+        function applyRaises(companyData) {
+            console.log("Before raises:");
+            companyData.employees.forEach(emp => {
+                console.log(`${emp.firstName}: $${emp.salary} (Eligible: ${emp.raiseEligible})`);
+            });
+
+            companyData.employees.forEach(employee => {
+                if (employee.raiseEligible) {
+                    employee.salary = Math.round(employee.salary * 1.10); // 10% raise, rounded
+                    employee.raiseEligible = false;
+
+                }
+            });
+
+            console.log("After raises: ");
+            companyData.employees.forEach(emp => {
+                console.log(`${emp.firstName}: $${emp.salary} (Eligible: ${emp.raiseEligible})`);
+            });
+
+            return companyData;
+        }
+
+        applyRaises(company);
+        console.log("Updated company after raises:", company);
+
+        console.log("Problem 6");
+        console.log("Update work from home status");
+
+        const workingFromHome = ['Anna', 'Sam'];
+
+        console.log("Employees working from home:", workingFromHome);
+
+        company.employees.forEach(employee => {
+            employee.wfh = workingFromHome.includes(employee.firstName);
+        });
+
+        console.log("Updated company with work from home status:");
+        company.employees.forEach(emp => {
+            console.log(`${emp.firstName}: WFH = ${emp.wfh}`);
+        });
+
+        console.log("Final company JSON:", company);
+    </script>
+</body>
+</html>
