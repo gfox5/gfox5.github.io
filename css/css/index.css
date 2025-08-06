@@ -9,7 +9,7 @@
 .nav-bar {
     position: sticky;
     top: 0;
-    background-color: #000;
+    background-color: var(--accent-color);
     padding: 15px;
     text-align: center;
     overflow-x: auto;
@@ -226,10 +226,7 @@ footer p{
 
 /* mobile */
 @media (max-width: 600px) {
- .container {
-     padding: 10px;
- }
- 
+
  header {
      padding: 15px 10px 10px;
  }
