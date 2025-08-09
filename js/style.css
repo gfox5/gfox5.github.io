@@ -1,4 +1,65 @@
-h1 {
-    
+body {
+    margin: 0;
+    font-family: Arial, sans-serif;
+    background-color: #222;
+    color: white;
+    overflow: hidden;
 }
 
+h1 {
+    text-align:center;
+    margin: 20px 0;
+}
+
+.status {
+    text-align: center;
+    font-size: 20px;
+    margin: 10px 0;
+}
+
+.number-button {
+    position:absolute;
+    width: 100px;
+    height: 100px;
+    color: white;
+    border: none;
+    border-radius: 50%;
+    font-size: 24px;
+    cursor: pointer;
+    transition: all 0.2s;
+    background-color: transparent;
+    background-image: url(mole.png);
+    background-size: cover;
+    background-position: center;
+}
+
+.number-button:hover {
+    background-image: url(mole.png);
+    background-size: cover;
+    background-position: center;
+    width: 110px;
+    height: 110px;
+}
+
+.controls {
+    position: fixed;
+    bottom: 20px;
+    left: 50%;
+    transform: translateX(-50%);
+    text-align: center;
+}
+
+button {
+    padding: 10px 20px;
+    font-size: 16px;
+    background: #514caf;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    margin: 5px;
+}
+
+button:hover {
+    background: #514caf;
+}
